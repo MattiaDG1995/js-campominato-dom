@@ -59,3 +59,7 @@ footer{
     padding: 20px;
     position: fixed;
 }
+
+.red{
+    background-color: crimson;
+}
