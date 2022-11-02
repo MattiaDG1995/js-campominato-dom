@@ -22,6 +22,7 @@ function avvia(){
         elemento.addEventListener('click', function(){
             console.log(this)
             this.classList.toggle('attiva')
+            //recupero il valore numerico al'l'ionterno della cella
             
         })
         
@@ -36,15 +37,21 @@ function avvia(){
     for (let x = 1; x <= 16; x++) {
 
         let rand;
-        let check = false;
+        //let check = false;
 
         //se è false
-        while( !check ){
+        //while( !check ){
+            //rand = Math.floor(Math.random() * 100);
+            //if( !tileIndexes.includes(rand) ){
+                //check = true
+            //}
+        //}
+
+        do{
             rand = Math.floor(Math.random() * 100);
-            if( !tileIndexes.includes(rand) ){
-                check = true
-            }
-        }
+        }while( tileIndexes.includes(rand) );
+
+        tileIndexes.push(rand);
 
         //!tileIndexes.includes(rand) = il numero random non è incluso nell'array, esempio 15 non è incluso, risultato true
                  
