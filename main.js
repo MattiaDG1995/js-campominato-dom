@@ -1,10 +1,29 @@
 const griglia = document.getElementById('griglia')
-console.log(griglia)
+// console.log(griglia)
 
- 
+let tiles = document.getElementsByClassName('tile');
+
+let tileIndexes = [];
+    //console.log('array: ', tileIndexes)
+function random(k){
+    
+    do{
+    let rand = Math.floor((Math.random() * k) + 1);
+    if( !tileIndexes.includes(rand) ){
+        tileIndexes.push(rand);
+        }
+    }while( tileIndexes.length < 16 );
+
+    return tileIndexes;
+}
+    
+    // const bombs = document.getElementById('bombs')
+
 function avvia(){
    
     griglia.innerHTML = '';
+    tileIndexes = random(100);   
+    console.log( tileIndexes );
 
     function functQuadrato(){
         
@@ -13,60 +32,40 @@ function avvia(){
         return div
     }  
     // console.log( functQuadrato() )   
-    for( let i=0; i<100; i++){
+    for( let i=1; i<101; i++){
         
         let elemento = functQuadrato()
-        elemento.innerText= i + 1
+        elemento.innerText= i
         // console.log(elemento) 
+       
     
-        elemento.addEventListener('click', function(){
-            console.log(this)
-            this.classList.toggle('attiva')
-            //recupero il valore numerico al'l'ionterno della cella
-            
-        })
-        
         griglia.append( elemento );
     }
 
-    let tiles = document.getElementsByClassName('tile');
-
-    let tileIndexes = [];
-    //console.log('array: ', tileIndexes)
+    const quadratiGriglia = document.querySelectorAll('.quadrato')
     
-    for (let x = 1; x <= 16; x++) {
 
-        let rand;
-        //let check = false;
+    for(let i=0; i<quadratiGriglia.length; i++){
+        let quadtratoCorrente = quadratiGriglia[i]
+        quadtratoCorrente.addEventListener('click', function(){
+            
+             
+            if( tileIndexes.includes(parseInt(quadtratoCorrente.innerHTML))){
+                
+                for( let j = 0; j < quadratiGriglia.length; j++){
+                    let quadratoPreso = quadratiGriglia[j]
+                    console.log(quadratoPreso)
+                    
 
-        //se è false
-        //while( !check ){
-            //rand = Math.floor(Math.random() * 100);
-            //if( !tileIndexes.includes(rand) ){
-                //check = true
-            //}
-        //}
-
-        do{
-            rand = Math.floor(Math.random() * 100);
-        }while( tileIndexes.includes(rand) );
-
-        tileIndexes.push(rand);
-
-        //!tileIndexes.includes(rand) = il numero random non è incluso nell'array, esempio 15 non è incluso, risultato true
-                 
-        //while ( !tileIndexes.includes(rand) ) {
-         // tileIndexes.push(rand);
-        //}
-
-
-        //const bombs = document.createElement('bombs')
-        //bombs.classList.add('red')
-        //return bombs
+                    if( tileIndexes.includes(parseInt(quadratoPreso.innerHTML))){
+                        quadratoPreso.classList.add('red')
+                    }
+                }
+            }else{
+                this.classList.toggle('attiva')
+            }
+             
+        })
     }
-
-    console.log( tileIndexes );
-      
-      
-    
+             
 }
